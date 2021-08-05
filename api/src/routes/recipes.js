@@ -6,7 +6,6 @@ require('dotenv').config();
 
 const {API_KEY} = process.env;
 const Url = `https://api.spoonacular.com/recipes/`
-// const UrlID = `https://api.spoonacular.com/recipes/`
 
 
 //traer receta por nombre
@@ -29,6 +28,7 @@ router.get('/:id', async (req, res, next) => {
          let info = await axios.get(`${Url}${id}/information?apiKey=${API_KEY}&includeNutrition=false`);
          if (info.data !== null) {
             let infoDetail = {
+               id: info.data.id,
                img: info.data.image,
                name: info.data.title,
                dish_type: info.data.dishTypes,
@@ -36,12 +36,12 @@ router.get('/:id', async (req, res, next) => {
                resume: info.data.summary,
                punctuation: info.data.spoonacularScore,
                level: info.data.healthScore,
-               step_by_step: info.data.instructions,
+               step_by_step: info.data.analyzedInstructions,
             };
             res.send(infoDetail);
          };
       } catch(e) {
-         next('gil')
+         next('no hay recetas')
       }
    }
 });
