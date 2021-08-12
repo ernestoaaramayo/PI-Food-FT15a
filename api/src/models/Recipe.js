@@ -10,25 +10,30 @@ module.exports = (sequelize) => {
       primaryKey: true,
       defaultValue: Sequelize.UUIDV4,
     },
-    name: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    resume: {
+    summary: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    punctuation: {
+    spoonacularScore: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    level: {
+    healthScore: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    step_by_step: {
+    stepByStep: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    createdInDb: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+      allowNull: false,
+    }
   });
 };

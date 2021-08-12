@@ -5,24 +5,28 @@ const router = express.Router();
 require('dotenv').config();
 
 const diets = [
-    'gluten_free',
+    'gluten free',
     'ketogenic',
-    'vegetarian',
-    'lacto-vegetarian',
-    'ovo-vegetarian',
+    'lacto ovo vegetarian',
     'vegan',
-    'pescetarian',
-    'paleo',
+    'pescatarian',
+    'paleolithic',
     'primal',
     'whole30',
+    'fodmap friendly',
+    'dairy free',
 ];
 
 router.get ('/', async(req, res, next) => {
-    diets.forEach(async (aux) => {
+    try{
+        diets.forEach(async (aux) => {
         await Diet.findOrCreate({where:{name: aux}})
-    })
-    let dietas = await Diet.findAll({attributes: ['name']});
-    res.send(dietas);
+        })
+        let dietas = await Diet.findAll({attributes: ['name']});
+        res.send(dietas);
+    } catch(e) {
+        next('no hay dietas')
+    }
 });
 
 module.exports = router;
