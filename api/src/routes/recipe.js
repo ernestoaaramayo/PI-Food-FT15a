@@ -8,7 +8,7 @@ router.post ('/',async (req, res, next) =>{
    let {title, summary, spoonacularScore, healthScore, stepByStep, diets} = req.body;
    try {
       let createdRecipe = await Recipe.create({title, summary, spoonacularScore, healthScore, stepByStep});
-      let dieta = await Diet.findOne({where: {name: diets}})
+      let dieta = await Diet.findAll({where: {name: diets}})
       await createdRecipe.addDiet(dieta);
       res.send(createdRecipe);
    } catch (e) {

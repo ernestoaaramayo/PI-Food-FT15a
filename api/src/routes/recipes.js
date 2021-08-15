@@ -30,11 +30,11 @@ router.get('/', async (req, res, next) => {
                      id: e.id, 
                      image: e.image, 
                      title: e.title, 
-                     diets: e.diets
+                     diets: e.diets,
                   }
                );
             });
-            res.send(recipeDB.concat(infoHome))
+            res.status(200).send(recipeDB.concat(infoHome))
          };
       } catch(e) {
          next(e)
@@ -51,11 +51,12 @@ router.get('/', async (req, res, next) => {
                      image: e.image,
                      title: e.title,
                      diets: e.diets,
+                     spoonacularScore: e.spoonacularScore
                   }
                );
             });
          let recipeDB = await Recipe.findAll({ 
-            attributes: ['id', 'title', 'createdInDb'],
+            attributes: ['id', 'title', 'createdInDb','spoonacularScore'],
             include: {
                model: Diet, 
                attributes: ['name'], 
@@ -64,7 +65,7 @@ router.get('/', async (req, res, next) => {
                }
             }
          });
-         res.send(recipeDB.concat(infoHome));
+         res.status(200).send(recipeDB.concat(infoHome));
          };
       } catch(e) {
          next(e);
@@ -85,7 +86,7 @@ router.get('/:id', async (req, res, next) => {
       try {
          let recipeDB = await Recipe.findOne({ 
             where:{id: id}, 
-            attributes: ['id', 'title','summary','spoonacularScore', 'healthScore','stepByStep'],
+            attributes: ['id', 'title','summary','spoonacularScore', 'healthScore', 'stepByStep', 'createdInDb'],
             include: {
                model: Diet, 
                attributes: ['name'],
@@ -94,7 +95,7 @@ router.get('/:id', async (req, res, next) => {
                }
             }
          });
-         res.send(recipeDB);
+         res.status(200).send(recipeDB);
       } catch(e) {
          next(e)
       }
@@ -108,20 +109,18 @@ router.get('/:id', async (req, res, next) => {
                title: info.data.title,
                dishTypes: info.data.dishTypes,
                diets: info.data.diets,
-               summary: info.data.summary,
                spoonacularScore: info.data.spoonacularScore,
                healthScore: info.data.healthScore,
             };
-            let infoStepByStep = info.data.analyzedInstructions.map (e => {
-               return {name: e.name, steps: e.steps.map(f => f.step).join(' ')};
-            });
+            let infoStepByStep = info.data.analyzedInstructions.map (e => e.steps.map(f => f.step).join(' '));
+            let infoSummary = info.data.summary.replace( /(<([^>]+)>)/ig, '');
             infoDetail.stepByStep = infoStepByStep;
-            res.send(infoDetail);
+            infoDetail.summary = infoSummary;
+            res.status(200).send(infoDetail);
          };
       } catch(e) {
          next(e)
       }
    }
 });
-
 module.exports = router;

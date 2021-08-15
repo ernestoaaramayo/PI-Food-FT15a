@@ -89,7 +89,7 @@ export default function Create() {
                   {calificacion.map((e) => (<option value={e}>{e}</option>))}
                </select>
             </div>
-            <select  onChange={(e) => handleSelect(e)}>
+            <select onChange={(e) => handleSelect(e)}>
                {diets.map((g) => (<option value={g.name}>{g.name}</option>))}
             </select>
             <ul>{input.diets.map(e => <li>{e}</li>)}</ul>

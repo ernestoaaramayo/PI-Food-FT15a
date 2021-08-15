@@ -100,7 +100,7 @@ function rootReducer(state = initialState, action) {
             case 'desc':
             return {
                 ...state,
-                recipes: state.rideogames.sort(function(a,b){
+                recipes: state.recipes.sort(function(a,b){
                     if(a.spoonacularScore > b.spoonacularScore){
                         return -1
                     }

@@ -17,22 +17,13 @@ export default function RecipeDetail(props) {
       <div>
          <NavBar></NavBar>
          <h2>{detail.title}</h2>
-         <h3>{detail.diets}</h3>
+         <h3>{!detail.createdInDb ? detail.diets + ' ': detail.diets.map(e => e.name + (' '))}</h3>
          <img src={detail.img} alt="img not found" width="250px" height="250px"/>
-         <div>{detail.dishType}</div>
          <h4>{detail.summary}</h4>
+         <div>{detail.dishType}</div>
          <div>{detail.spoonacularScore}</div>
          <div>{detail.healthScore}</div>
-         <div>
-            {detail.stepByStep.map(e => {
-               return(
-                  <div>
-                     <h3>{e.name}</h3>
-                     <h4>{e.steps}</h4>
-                  </div>
-               )
-            })}
-         </div>
+         <div><h4>{detail.stepByStep}</h4></div>
       </div>
    );
 };

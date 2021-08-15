@@ -2,11 +2,12 @@ import React from "react";
 import {Link} from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllRecipes, getDiets, filterByOrigin, filterByDiet, orderByName } from "../../actions";
+import { getAllRecipes, getDiets, filterByOrigin, filterByDiet, orderByName, orderByScore } from "../../actions";
 import SearchBar from '../SearchBar/SearchBar';
 import Card from '../Card/Card';
 import NavBar from '../NavBar/NavBar';
 import Paginado from '../Paginado/Paginado';
+import './Home.css';
 
 export default function Home() {
    let allRecipes = useSelector(state => state.recipes)
@@ -34,21 +35,25 @@ export default function Home() {
       dispatch(filterByDiet(e.target.value));
    };
 
+   function handleSortByScore(e){
+      e.preventDefault();
+      dispatch(orderByScore(e.target.value));
+      setCurrentPage(1);
+      setOrden(`Ordenado ${e.target.value}`)
+   }
 
-
-   function handleSort (e) {
+   function handleSortByName (e) {
       e.preventDefault();
       dispatch(orderByName(e.target.value))
       setCurrentPage(1);
       setOrden(`Ordenado ${e.target.value}`)
    };
 
-
    return (
-      <div>
-         <div>
-            <NavBar></NavBar>
-            <button><Link to='/create'>Crear Receta</Link></button>
+      <div className='container'>
+         <div className='wallpaper'></div>
+         <NavBar className='barra'></NavBar>
+         <div className='cosas'>
             <select onChange={e => handleFilterByDiet(e)}>
                <option value="">Tipo de Dieta</option>
                <option value="all">Todas</option>
@@ -64,10 +69,15 @@ export default function Home() {
                <option value="db">Base de Datos</option>
                <option value="api">Api</option>
             </select>
-            <select onChange={e => handleSort(e)} >
+            <select onChange={e => handleSortByName(e)} >
                <option value="">Ordenar</option>
                <option value="asc">A-Z</option>
                <option value="desc">Z-A</option>
+            </select>
+            <select onChange={e => handleSortByScore(e)} >
+               <option value="">Puntuación</option>
+               <option value="asc">Ascendente</option>
+               <option value="desc">Descendente</option>
             </select>
             <Paginado recipesPerPage={recipesPerPage} allRecipes={allRecipes.length} paginado={paginado}/>
          </div>
@@ -83,6 +93,7 @@ export default function Home() {
                      e.diets.map(f => f + '\n') : 
                      e.diets.map(f => f.name + '\n')} 
                   id={e.id}
+                  spoonacularScore={e.spoonacularScore}
                />
             )}
          </div>
