@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecipeDetail } from '../../actions/index';
 import NavBar from "../NavBar/NavBar";
+import './RecipeDetail.css';
 
 export default function RecipeDetail(props) {
    const id = props.match.params.id;
@@ -14,16 +15,20 @@ export default function RecipeDetail(props) {
    const detail = useSelector(state => state.recipeDetail);
 
    return (
-      <div>
+      <div className='detailContainer'>
          <NavBar></NavBar>
-         <h2>{detail.title}</h2>
-         <h3>{!detail.createdInDb ? detail.diets + ' ': detail.diets.map(e => e.name + (' '))}</h3>
-         <img src={detail.img} alt="img not found" width="250px" height="250px"/>
-         <h4>{detail.summary}</h4>
-         <div>{detail.dishType}</div>
-         <div>{detail.spoonacularScore}</div>
-         <div>{detail.healthScore}</div>
-         <div><h4>{detail.stepByStep}</h4></div>
+         <div className='textContainer'>
+            <div className='titleDetail'>{detail.title}</div>
+            <div className='dietsDetail'>Diets: {!detail.createdInDb ? detail.diets + ' ': detail.diets.map(e => e.name + (' '))}</div>
+            <div className='dishDetail'>Dish Type: {detail.dishTypes + ' '}</div>
+            <div className='scoreDetail'>spoonacularScore: {detail.spoonacularScore}</div>
+            <div className='healthDetail'>healthScore: {detail.healthScore}</div>
+            <br/>
+            <img className='imgDetail'src={detail.img} alt="img not found" width="250px" height="250px"/>
+            <div className='summaryDetail'>Summary: {detail.summary}</div>
+            <br/>
+            <div className='stepDetail'>Step By Step: {detail.stepByStep}</div>
+         </div>
       </div>
    );
 };

@@ -7,7 +7,7 @@ export default function LandingPage(){
         <div>
             <div className='wallpaperLP'/>
             <div className="buttonContainer">
-                <NavLink to='/home'>
+                <NavLink className='btnLink' to='/home'>
                     <span id='text' className='glow-on-hover'> Henry Food </span>
                 </NavLink>
             </div>

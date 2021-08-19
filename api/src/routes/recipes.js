@@ -13,6 +13,7 @@ router.get('/', async (req, res, next) => {
       //trae receta por nombre
       try {
          let recipeDB = await Recipe.findAll({ 
+            where: {title: title},
             attributes: ['id', 'title', 'createdInDb'],
             include: {
                model: Diet, 

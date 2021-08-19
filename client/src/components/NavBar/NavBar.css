@@ -16,7 +16,6 @@
 
 .navbar li {
    display: inline;
-   color: black;
    float: left;
    padding: 8px 16px;
    text-decoration: none;
@@ -26,12 +25,13 @@
    font-family: 'Cookie', cursive;
    font-weight: 700;
    background-color: white;
+   font-size: 25px;
 }
 
 .navbar li:active {
    background-color: #4CAF50;
    border-radius: 5px;
-   color: white;
+   color: green;
 }
 
 .navbar li:hover:not(:active) {

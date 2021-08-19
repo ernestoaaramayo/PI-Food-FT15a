@@ -16,19 +16,15 @@ module.exports = (sequelize) => {
     },
     summary: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     spoonacularScore: {
       type: DataTypes.INTEGER,
-      allowNull: false,
     },
     healthScore: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     stepByStep: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     createdInDb: {
       type: DataTypes.BOOLEAN,

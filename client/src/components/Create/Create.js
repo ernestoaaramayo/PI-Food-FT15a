@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getDiets, createRecipe } from '../../actions/index';
 import NavBar from "../NavBar/NavBar";
+import './Create.css';
 
 
 export default function Create() {
@@ -64,40 +65,46 @@ export default function Create() {
       calificacion.push(i+1);
    }
    return(
-      <div >
+      <div className='createContainer'>
          <NavBar></NavBar>
-         <div className='creating'>
          <form onSubmit={(e)=>handleOnSubmit(e)} className='form'>
-            <h1>Crea tu propia receta!</h1>
-            <div>
-               <label>Título:</label>
-               <input type= "text" value= {input.title} name= "title" onChange={(e)=>handleInputChange(e)}/>
+            <h1 className='header'>Crea tu propia receta!</h1>
+            <div className='title'>
+               <label>Título: </label>
+               <br/>
+               <input  type= "text" value= {input.title} name= "title" onChange={(e)=>handleInputChange(e)}/>
             </div>
-            <div>
-               <label>Resumen:</label>
-               <input type= "text" value= {input.summary} name= "summary" onChange={(e)=>handleInputChange(e)}/>
+            <div className='summary'>
+               <label>Resumen: </label>
+               <br/>
+               <input  type= "text" value= {input.summary} name= "summary" onChange={(e)=>handleInputChange(e)}/>
             </div>
-            <div>
-               <label>Puntuación:</label>
-               <select type="number" name='spoonacularScore' value= {input.spoonacularScore} onChange={(e)=>handleInputChange(e)}>
+            <div className='select'>
+               <label>Puntuación: </label>
+               <br/>
+               <select  type="number" name='spoonacularScore' value= {input.spoonacularScore} onChange={(e)=>handleInputChange(e)}>
                   {calificacion.map((e) => (<option value={e}>{e}</option>))}
                </select>
             </div>
-            <div>
-               <label>Nivel de comida saludable:</label>
-               <select type="number" name='healthScore' value= {input.healthScore} onChange={(e)=>handleInputChange(e)}>
+            <div className='select'>
+               <label>Nivel de comida saludable: </label>
+               <br/>
+               <select  type="number" name='healthScore' value= {input.healthScore} onChange={(e)=>handleInputChange(e)}>
                   {calificacion.map((e) => (<option value={e}>{e}</option>))}
                </select>
             </div>
-            <select onChange={(e) => handleSelect(e)}>
-               {diets.map((g) => (<option value={g.name}>{g.name}</option>))}
-            </select>
-            <ul>{input.diets.map(e => <li>{e}</li>)}</ul>
-            <button type="reset" value="Restaurar">Restaurar</button>
+            <div className='select'>
+               <label>Dietas: </label>
+               <br/>
+               <select  onChange={(e) => handleSelect(e)}>
+                  {diets.map((g) => (<option value={g.name}>{g.name}</option>))}
+               </select>
+            </div>
+            <ul className='dietas'>{input.diets.map(e => <li>{e}</li>)}</ul>
+            {/* <button type="reset" value="Restaurar">Restaurar</button> */}
             <br/>
-            <button type='submit'>Crear receta</button>​
+            <button className='button' type='submit'>Crear receta</button>​
          </form>
-         </div>
       </div>
    )
 }

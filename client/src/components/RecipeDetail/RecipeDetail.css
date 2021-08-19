@@ -1,0 +1,44 @@
+:root {
+   --bg-color: #865439;
+   --btn-color: #8FC1D4;
+   --letter-color-text: #FCDEC0;
+   --letter-color-link: black; 
+   --font-family: 'Cookie', cursive;
+   --weight: 400; 
+}
+
+
+
+.detailContainer{
+   background-color: var(--bg-color);
+   width: 100vw;
+   height: 100vh;
+   overflow:auto;
+   color: var(--letter-color-text);
+   font-family: var(--font-family);
+}
+
+.imgDetail{
+   float: left;
+   width: 300px;
+   height: 300px;
+   border-radius: 5px;
+   padding: 20px;
+}
+.textContainer{
+   font-weight: var(--weight);
+}
+.titleDetail{
+   font-size: 45px;
+}
+.dietsDetail{
+   font-size: 35px;
+}
+.summaryDetail, .stepDetail{
+   font-size: 25px;
+   text-align: justify;
+   margin-right: 10px;
+}
+.dishDetail, .scoreDetail, .healthDetail{
+   font-size: 25px;
+}
